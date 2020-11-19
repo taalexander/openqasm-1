@@ -55,7 +55,7 @@ repetition is denoted by ``+`` (one or more) and ``*`` (zero or more). An ellips
     independent_type_declaration: independent_type_specifier id
     association: ":" id
     return_signature: "->" classical_declaration
-    constant_declaration: "const" id assignment_expression
+    constant_declaration: "const" id "=" expression
     classical_declaration: ( bit_declaration | dependent_type_declaration
         :| independent_type_declaration ) assignment_expression?
     program_block: "{" ( program_block | statement ) "}"
@@ -137,11 +137,11 @@ repetition is denoted by ``+`` (one or more) and ``*`` (zero or more). An ellips
     time_terminator: time | "stretchinf"
     time: id time_unit? | "lengthof" "(" id ")"
     time_unit: "dt" | "ns" | "us" | "ms" | "s"
-    calibration: cal_grammar_declaration | calibration_definition
-    cal_grammar_declaration: "defcalgrammar" cal_grammar ";"
-    calibration_definition: "defcal" cal_gramamr? id cal_args physical_qubit_list
+    calibration: cal_grammar_declaration | cal_definition
+    cal_grammar_declaration: "defcalgrammar" cal_grammar_id ";"
+    cal_definition: "defcal" cal_grammar_id? id cal_args physical_qubit_list
         :| return_signature cal_body
-    cal_grammar: ( "openpulse" | id )*
+    cal_grammar_id: ( "openpulse" | id )*
     cal_args: ( "(" [ id_const_list ] ")" )*
     id_const_list: ( numeric_terminator "," )* numeric_terminator
     cal_body: "{" ... "}"
